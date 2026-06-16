@@ -28,7 +28,7 @@ class PuzzleSeeder extends Seeder
             ],
             [
                 'name' => 'Profile Puzzle',
-                'image_path' => 'puzzles/profile.png',
+                'image_path' => 'puzzles/profil.png',
                 'difficulty' => 'medium',
                 'grid_size' => 6,
             ],
@@ -40,7 +40,7 @@ class PuzzleSeeder extends Seeder
             ],
             [
                 'name' => 'Screenshot 20',
-                'image_path' => 'puzzles/Screenshot 20.png',
+                'image_path' => 'puzzles/hantu.png',
                 'difficulty' => 'hard',
                 'grid_size' => 10,
             ],
