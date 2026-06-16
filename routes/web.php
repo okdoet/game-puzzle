@@ -17,6 +17,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 use App\Http\Controllers\Admin\PuzzleController;
 use App\Http\Controllers\Customer\GameController;
+use App\Http\Controllers\Customer\TicTacToeController;
 
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -37,5 +38,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/game', [GameController::class, 'index'])->name('game.index');
         Route::get('/game/{id}/play', [GameController::class, 'play'])->name('game.play');
         Route::post('/game/{id}/complete', [GameController::class, 'complete'])->name('game.complete');
+
+        Route::get('/tictactoe', [TicTacToeController::class, 'index'])->name('tictactoe.index');
     });
 });
