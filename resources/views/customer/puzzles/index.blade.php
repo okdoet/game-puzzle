@@ -30,20 +30,5 @@
             No puzzle levels available yet.
         </div>
     @endforelse
-
-    <div class="card" style="padding: 0; overflow: hidden; position: relative; transition: transform 0.3s;">
-        <div style="height: 200px; background: linear-gradient(135deg, #6366f1, #ec4899); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
-            ⭕❌
-        </div>
-
-        <div style="padding: 1.5rem;">
-            <h3 style="margin-bottom: 0.5rem;">Tic Tac Toe</h3>
-            <div style="display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
-                <span>2 Player &amp; vs AI</span>
-            </div>
-
-            <a href="{{ route('customer.tictactoe.index') }}" class="btn" style="width: 100%; text-align: center;">Play Now</a>
-        </div>
-    </div>
 </div>
 @endsection

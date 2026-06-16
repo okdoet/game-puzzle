@@ -128,7 +128,7 @@
             <button class="ttt-mode-btn" data-mode="ai">vs AI</button>
         </div>
 
-        <div class="ttt-status" id="ttt-status">Player X's turn</div>
+        <div class="ttt-status" id="ttt-status">Player 1's turn</div>
 
         <div class="ttt-board" id="ttt-board">
             @for($i = 0; $i < 9; $i++)
@@ -138,7 +138,7 @@
 
         <div class="ttt-scores">
             <div class="ttt-score x">
-                <div class="ttt-score-label">Player X</div>
+                <div class="ttt-score-label" id="label-x">Player 1</div>
                 <div class="ttt-score-value" id="score-x">0</div>
             </div>
             <div class="ttt-score draw">
@@ -146,7 +146,7 @@
                 <div class="ttt-score-value" id="score-draw">0</div>
             </div>
             <div class="ttt-score o">
-                <div class="ttt-score-label" id="label-o">Player O</div>
+                <div class="ttt-score-label" id="label-o">Player 2</div>
                 <div class="ttt-score-value" id="score-o">0</div>
             </div>
         </div>
@@ -164,6 +164,7 @@
     const cells = Array.from(boardEl.querySelectorAll('.ttt-cell'));
     const resetBtn = document.getElementById('ttt-reset');
     const modeBtns = Array.from(document.querySelectorAll('.ttt-mode-btn'));
+    const labelX = document.getElementById('label-x');
     const labelO = document.getElementById('label-o');
 
     const scores = { X: 0, O: 0, draw: 0 };
@@ -172,6 +173,7 @@
 
     let board = Array(9).fill('');
     let current = 'X';
+    let startingPlayer = 'X';
     let mode = 'pvp'; // 'pvp' or 'ai'
     let gameOver = false;
 
@@ -225,7 +227,8 @@
             if (mode === 'ai') {
                 setStatus(result.player === HUMAN ? 'You win! 🎉' : 'AI wins!');
             } else {
-                setStatus('Player ' + result.player + ' wins! 🎉');
+                const playerNum = result.player === 'X' ? '1' : '2';
+                setStatus('Player ' + playerNum + ' wins! 🎉');
             }
         }
         updateScores();
@@ -235,7 +238,8 @@
         if (mode === 'ai') {
             setStatus(current === HUMAN ? 'Your turn' : 'AI is thinking...');
         } else {
-            setStatus("Player " + current + "'s turn");
+            const playerNum = current === 'X' ? '1' : '2';
+            setStatus("Player " + playerNum + "'s turn");
         }
     }
 
@@ -284,9 +288,16 @@
         move(best.index, AI);
     }
 
-    function reset() {
+    function reset(isModeSwitch = false) {
         board = Array(9).fill('');
-        current = 'X';
+        if (isModeSwitch === true) {
+            startingPlayer = 'X';
+        } else if (mode === 'pvp') {
+            startingPlayer = startingPlayer === 'X' ? 'O' : 'X';
+        } else {
+            startingPlayer = 'X';
+        }
+        current = startingPlayer;
         gameOver = false;
         render();
         nextTurnStatus();
@@ -314,16 +325,17 @@
             modeBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             mode = btn.dataset.mode;
-            labelO.textContent = mode === 'ai' ? 'AI (O)' : 'Player O';
+            labelX.textContent = mode === 'ai' ? 'Player' : 'Player 1';
+            labelO.textContent = mode === 'ai' ? 'AI' : 'Player 2';
             scores.X = 0;
             scores.O = 0;
             scores.draw = 0;
             updateScores();
-            reset();
+            reset(true);
         });
     });
 
-    resetBtn.addEventListener('click', reset);
+    resetBtn.addEventListener('click', () => reset(false));
 
     render();
     nextTurnStatus();

@@ -32,8 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('customer')->name('customer.')->group(function () {
         Route::get('/dashboard', function () {
             if (auth()->user()->role !== 'customer') abort(403);
-            return redirect()->route('customer.game.index');
-        });
+            return view('customer.dashboard');
+        })->name('dashboard');
 
         Route::get('/game', [GameController::class, 'index'])->name('game.index');
         Route::get('/game/{id}/play', [GameController::class, 'play'])->name('game.play');
