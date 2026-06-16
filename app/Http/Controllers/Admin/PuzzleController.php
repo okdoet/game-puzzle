@@ -29,7 +29,9 @@ class PuzzleController extends Controller
             'difficulty' => 'required|in:easy,medium,hard',
         ]);
 
-        $imagePath = $request->file('image')->store('puzzles', 'public');
+        $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+        $request->file('image')->move(public_path('puzzles'), $imageName);
+        $imagePath = 'puzzles/' . $imageName;
 
         $gridSize = 3;
         if ($request->difficulty === 'medium') {
@@ -52,7 +54,10 @@ class PuzzleController extends Controller
     {
         $level = PuzzleLevel::findOrFail($id);
         if ($level->image_path) {
-            Storage::disk('public')->delete($level->image_path);
+            $fullPath = public_path($level->image_path);
+            if (file_exists($fullPath) && is_file($fullPath)) {
+                unlink($fullPath);
+            }
         }
         $level->delete();
 

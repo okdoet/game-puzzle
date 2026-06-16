@@ -25,7 +25,7 @@
             <tr style="border-bottom: 1px solid var(--border-color);">
                 <td style="padding: 1rem;">{{ $level->id }}</td>
                 <td style="padding: 1rem;">
-                    <img src="{{ asset('storage/' . $level->image_path) }}" alt="{{ $level->name }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                    <img src="{{ asset($level->image_path) }}" alt="{{ $level->name }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
                 </td>
                 <td style="padding: 1rem;">{{ $level->name }}</td>
                 <td style="padding: 1rem; text-transform: capitalize;">{{ $level->difficulty }}</td>

@@ -1,8 +1,2 @@
+*
 !.gitignore
-!puzzles/
-!puzzles/*
-!*.jpg
-!*.jpeg
-!*.png
-!*.webp
-!*.gif

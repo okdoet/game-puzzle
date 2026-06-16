@@ -19,7 +19,7 @@
 
     .puzzle-tile {
         background-color: var(--card-bg);
-        background-image: url('{{ asset("storage/" . $level->image_path) }}');
+        background-image: url('{{ asset($level->image_path) }}');
         background-repeat: no-repeat;
         cursor: pointer;
         transition: transform 0.1s;

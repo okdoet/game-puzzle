@@ -146,7 +146,7 @@
                 @if(auth()->user()->role === 'admin')
                     <a href="{{ route('admin.puzzles.index') }}">Manage Puzzles</a>
                 @else
-                    <a href="{{ route('customer.game.index') }}">Play Games</a>
+                    <a href="{{ route('customer.dashboard') }}">Play Games</a>
                 @endif
                 <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                     @csrf

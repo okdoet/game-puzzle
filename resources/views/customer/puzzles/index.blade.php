@@ -11,7 +11,7 @@
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
     @forelse($levels as $level)
         <div class="card" style="padding: 0; overflow: hidden; position: relative; transition: transform 0.3s;">
-            <div style="height: 200px; background: url('{{ asset('storage/' . $level->image_path) }}') center/cover;"></div>
+            <div style="height: 200px; background: url('{{ asset($level->image_path) }}') center/cover;"></div>
             
             <div style="padding: 1.5rem;">
                 <h3 style="margin-bottom: 0.5rem;">{{ $level->name }}</h3>
