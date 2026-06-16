@@ -7,6 +7,8 @@
     .ttt-wrapper {
         max-width: 460px;
         margin: 0 auto;
+        font-family: var(--font-sans, system-ui, sans-serif);
+        padding: 2rem 0 1rem;
     }
 
     .ttt-modes {
@@ -18,18 +20,22 @@
     .ttt-mode-btn {
         flex: 1;
         padding: 0.75rem 1rem;
-        background: transparent;
-        border: 1px solid var(--border-color);
+        background: var(--card-banner-bg, #f8f8f9);
+        border: 0.5px solid var(--border-color);
         color: var(--text-muted);
         border-radius: 10px;
-        font-weight: 600;
+        font-weight: 500;
         cursor: pointer;
-        transition: all 0.3s;
+        transition: all 0.2s;
     }
 
     .ttt-mode-btn:hover {
-        color: var(--text-main);
-        border-color: var(--primary);
+        color: var(--text-color, #111);
+        border-color: rgba(0,0,0,0.2);
+    }
+    
+    [data-theme="dark"] .ttt-mode-btn:hover {
+        border-color: rgba(255,255,255,0.3);
     }
 
     .ttt-mode-btn.active {
@@ -40,11 +46,11 @@
 
     .ttt-status {
         text-align: center;
-        font-size: 1.1rem;
-        font-weight: 600;
+        font-size: 1.0625rem;
+        font-weight: 500;
         margin-bottom: 1.5rem;
         min-height: 1.5rem;
-        color: var(--text-main);
+        color: var(--text-color, #111);
     }
 
     .ttt-board {
@@ -56,31 +62,35 @@
 
     .ttt-cell {
         aspect-ratio: 1 / 1;
-        background: rgba(15, 23, 42, 0.6);
-        border: 1px solid var(--border-color);
+        background: var(--card-bg, #fff);
+        border: 0.5px solid var(--border-color);
         border-radius: 12px;
         font-size: 3rem;
-        font-weight: 700;
-        color: var(--text-main);
+        font-weight: 500;
+        color: var(--text-color, #111);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.2s;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         user-select: none;
     }
 
     .ttt-cell:hover:not(.taken) {
-        background: rgba(99, 102, 241, 0.15);
-        border-color: var(--primary);
+        background: var(--card-banner-bg, #f8f8f9);
+        border-color: rgba(0,0,0,0.2);
+    }
+    
+    [data-theme="dark"] .ttt-cell:hover:not(.taken) {
+        border-color: rgba(255,255,255,0.3);
     }
 
-    .ttt-cell.x { color: #818cf8; }
-    .ttt-cell.o { color: #f472b6; }
+    .ttt-cell.x { color: var(--primary); }
+    .ttt-cell.o { color: #ec4899; }
 
     .ttt-cell.win {
-        background: rgba(16, 185, 129, 0.2);
-        border-color: var(--success);
+        background: rgba(16, 185, 129, 0.1);
+        border-color: #10b981;
     }
 
     .ttt-scores {
@@ -93,36 +103,41 @@
 
     .ttt-score {
         padding: 1rem 0.5rem;
-        background: rgba(15, 23, 42, 0.6);
-        border: 1px solid var(--border-color);
+        background: var(--card-bg, #fff);
+        border: 0.5px solid var(--border-color);
         border-radius: 12px;
     }
 
     .ttt-score-label {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         color: var(--text-muted);
-        margin-bottom: 0.35rem;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 500;
     }
 
     .ttt-score-value {
-        font-size: 1.75rem;
-        font-weight: 700;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color, #111);
     }
 
-    .ttt-score.x .ttt-score-value { color: #818cf8; }
-    .ttt-score.o .ttt-score-value { color: #f472b6; }
+    .ttt-score.x .ttt-score-value { color: var(--primary); }
+    .ttt-score.o .ttt-score-value { color: #ec4899; }
     .ttt-score.draw .ttt-score-value { color: var(--text-muted); }
 </style>
 @endpush
 
 @section('content')
-<div class="header" style="text-align: center; margin-bottom: 2rem;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #a5b4fc, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tic Tac Toe</h1>
-    <p style="color: var(--text-muted);">Play against a friend or challenge the AI</p>
-</div>
-
 <div class="ttt-wrapper">
-    <div class="card">
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <p style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 0.75rem;">Strategy</p>
+        <h1 style="font-size: 2rem; font-weight: 500; color: var(--text-color, #111); margin: 0 0 0.4rem; line-height: 1.2;">Tic Tac Toe</h1>
+        <p style="font-size: 0.9375rem; color: var(--text-muted); margin: 0;">Play against a friend or challenge the AI</p>
+    </div>
+
+    <div style="background: var(--card-bg, #fff); border: 0.5px solid var(--border-color); border-radius: 16px; padding: 2rem;">
         <div class="ttt-modes">
             <button class="ttt-mode-btn active" data-mode="pvp">2 Player</button>
             <button class="ttt-mode-btn" data-mode="ai">vs AI</button>
@@ -152,6 +167,10 @@
         </div>
 
         <button class="btn" id="ttt-reset" style="width: 100%; text-align: center;">New Game</button>
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{{ route('customer.dashboard') }}" class="btn btn-secondary" style="font-size: 0.875rem; padding: 0.5rem 1rem;">Back to Dashboard</a>
     </div>
 </div>
 @endsection

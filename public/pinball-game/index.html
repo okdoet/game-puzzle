@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimension Rally</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="ui-layer">
+            <div id="score-board">
+                <div class="score" id="player-score">SCORE: 0</div>
+                <div id="dimension-text">LEVEL: NORMAL</div>
+                <div class="score" id="player-lives">LIVES: 3</div>
+            </div>
+            
+            <div id="beat-tracker">
+                <div id="beat-bar"></div>
+                <div id="beat-marker-left" class="beat-marker"></div>
+                <div id="beat-marker-right" class="beat-marker"></div>
+                <div id="beat-cursor"></div>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="start-screen" class="overlay">
+            <h1>DIMENSION RALLY</h1>
+            <p>Move mouse to control paddle. CLICK/SPACE to swing when ball is near.</p>
+            <p>Time your click when the ball is right in front of your paddle for a PERFECT strike!</p>
+            <button id="start-btn">START GAME</button>
+            <div id="leaderboard" class="leaderboard-panel">
+                <h3>TOP SCORES</h3>
+                <ul id="leaderboard-list"></ul>
+            </div>
+        </div>
+        
+        <div id="game-over-screen" class="overlay hidden">
+            <h1>YOU LOSE</h1>
+            <p id="final-score">Score: 0</p>
+            <button id="restart-btn">REBOOT</button>
+            <div id="game-over-leaderboard" class="leaderboard-panel">
+                <h3>TOP SCORES</h3>
+                <ul id="game-over-leaderboard-list"></ul>
+            </div>
+        </div>
+        
+        <div id="hit-feedback"></div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
